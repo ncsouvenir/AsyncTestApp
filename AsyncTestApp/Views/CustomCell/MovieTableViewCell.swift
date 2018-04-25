@@ -47,9 +47,4 @@ class MovieTableViewCell: UITableViewCell {
             movieImage.bottomAnchor.constraint(equalTo: bottomAnchor)
             ])
     }
-    
-    
-    
-  
-    
 }

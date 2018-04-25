@@ -20,11 +20,11 @@ class MovieAPITest: XCTestCase {
         MovieAPI.searchMovies(query: "") {(error, data) in
             if let error = error {
                 XCTFail("mmovie search error: \(error)")
-            } else {
+            } else if let data = data {
                 do{
                     let decoder = JSONDecoder()
                     let results = try decoder.decode(MovieSearch.self, from:  data)
-                    movieCount = search.results.count
+                    movieCount = results.results.count
                     //must have this to know if test attempts to pass
                     exp.fulfill()
                 } catch {
@@ -46,18 +46,16 @@ class MovieAPITest: XCTestCase {
     func testMovie(){
         //what we are expecting to get back
         let exp = expectation(description: "movie results received")
-        var movieCount = 0
-        var movieSearch =
+        var results: MovieSearch!
             
             //what we are testing
             MovieAPI.searchMovies(query: "") {(error, data) in
                 if let error = error {
                     XCTFail("mmovie search error: \(error)")
-                } else {
+                } else if let data = data {
                     do{
                         let decoder = JSONDecoder()
-                        let results = try decoder.decode(MovieSearch.self, from:  data)
-                        movieCount = search.results.count
+                        results = try decoder.decode(MovieSearch.self, from:  data)
                         //must have this to know if test attempts to pass
                         exp.fulfill()
                     } catch {
@@ -73,12 +71,13 @@ class MovieAPITest: XCTestCase {
         /*inputs:
          
          expectation to compare to
-         string being tested
+         string being tested    
          failed message
          
          */
-        XCTAssertEqual(search.results[0].trackName, "Blue Collar Comedy Tour: One for the Road", "Movie does not exist")
+        XCTAssertEqual(results.results[0].trackName, "Blue Collar Comedy Tour: One for the Road", "Movie does not exist")
     }
+    
     /*Things you can test for: Edge cases
      
      test data count

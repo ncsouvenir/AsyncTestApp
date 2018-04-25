@@ -10,16 +10,16 @@ import Foundation
 
 struct MovieAPI {
     //getting access to the outside world
-    let urlSession = URLSession(configuration: .default)
-    let urlRequest = URLRequest(url: URL(string: "https://itunes.apple.com/search?media=movie&term=comedy&limit=10")!)
+    static let urlSession = URLSession(configuration: .default)
+    static let urlRequest = URLRequest(url: URL(string: "https://itunes.apple.com/search?media=movie&term=comedy&limit=10")!)
     
     
-    func searchMovies(query: String, completion: @escaping (Error?, Data?) -> Void){
+    static func searchMovies(query: String, completion: @escaping (Error?, Data?) -> Void){
         urlSession.dataTask(with: urlRequest) {(data, response, error) in
             if let error = error {
-                print("movies error: \(error.localizedDescription)")
+                completion(error, nil)
             } else if let data = data {
-                print("data recieved: \(data)")
+                completion(nil, data)
             }
             }.resume()
     }

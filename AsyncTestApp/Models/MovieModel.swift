@@ -15,4 +15,5 @@ struct MovieSearch: Codable{
 struct Movie: Codable {
     let trackName: String
     let artistName: String
+    let artworkUrl30: String
 }

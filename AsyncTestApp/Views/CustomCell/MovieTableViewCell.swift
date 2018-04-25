@@ -14,6 +14,7 @@ class MovieTableViewCell: UITableViewCell {
     lazy var movieImage: UIImageView = {
         let image = UIImageView()
         image.image = #imageLiteral(resourceName: "noImg")
+        image.contentMode = .scaleAspectFit
         return image
     }()
     
@@ -28,7 +29,7 @@ class MovieTableViewCell: UITableViewCell {
     }
     
     func setupGUI(){
-        backgroundColor = .green
+        backgroundColor = UIColor.gray
         setupViews()
     }
     
@@ -41,10 +42,23 @@ class MovieTableViewCell: UITableViewCell {
         
         NSLayoutConstraint.activate([
             //movie image
-            movieImage.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.80),
+            movieImage.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.85),
+            movieImage.widthAnchor.constraint(equalTo: widthAnchor),
             movieImage.topAnchor.constraint(equalTo: topAnchor, constant: 10),
             movieImage.leadingAnchor.constraint(equalTo: leadingAnchor),
-            movieImage.bottomAnchor.constraint(equalTo: bottomAnchor)
             ])
+    }
+    
+    public func configureCell(movie: Movie){
+        self.movieImage.image = #imageLiteral(resourceName: "noImg")
+        let movieImage = movie.artworkUrl100
+        
+        let parseDataIntoImages: (UIImage) -> Void = {(onlineImage: UIImage) in
+            self.movieImage.image = onlineImage
+            self.setNeedsLayout()
+        }
+        ImageHelper.manager.getImage(from: movieImage,
+                                     completionHandler: parseDataIntoImages,
+                                     errorHandler: {print($0)})
     }
 }

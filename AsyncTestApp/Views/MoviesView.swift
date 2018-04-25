@@ -13,7 +13,7 @@ class MoviesView: UIView {
 //lazy var tableview
     lazy var tableView: UITableView = {
         let tv = UITableView()
-        tv.backgroundColor = .green
+        tv.backgroundColor = UIColor.white
         //create and register cell
         tv.register(MovieTableViewCell.self, forCellReuseIdentifier: "MovieCell")
         tv.tableFooterView = UIView(frame: .zero)

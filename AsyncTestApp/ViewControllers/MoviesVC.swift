@@ -42,8 +42,6 @@ class MoviesVC: UIViewController {
     }
 }
 
-
-//add extensions
 extension MoviesVC: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return movies.count
@@ -58,7 +56,6 @@ extension MoviesVC: UITableViewDataSource{
         return cell
     }
 }
-
 
 extension MoviesVC: UITableViewDelegate{
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

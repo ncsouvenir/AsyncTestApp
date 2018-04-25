@@ -9,8 +9,8 @@
 import UIKit
 
 class MoviesView: UIView {
-
-//lazy var tableview
+    
+    //lazy var tableview
     lazy var tableView: UITableView = {
         let tv = UITableView()
         tv.backgroundColor = UIColor.white
@@ -50,7 +50,4 @@ class MoviesView: UIView {
             tableView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor)
             ])
     }
-    
-
-
 }
